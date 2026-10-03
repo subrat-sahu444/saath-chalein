@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Saath Chalein — Student Ride Sharing</title>
+<style>
+:root{--navy:#153b57;--teal:#1d607e;--bg:#f6fafc;--card:#fff;--muted:#60717d;--line:#d8e5ec;--green:#1f8a70;--danger:#c93b3b}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:#1f2933}
+header{background:linear-gradient(135deg,var(--navy),var(--teal));color:#fff;padding:20px 7vw}
+nav{display:flex;justify-content:space-between;align-items:center;gap:16px}.brand{font-weight:800;font-size:24px}.pill{font-size:12px;padding:7px 11px;border:1px solid #ffffff44;border-radius:999px;background:#ffffff16}
+main{max-width:1100px;margin:0 auto;padding:34px 20px 50px}.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center}
+h1{font-size:48px;line-height:1.03;margin:0 0 15px;color:var(--navy)}h2{color:var(--navy);margin:0 0 12px}p{color:var(--muted);line-height:1.65}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0}.btn{border:0;border-radius:10px;padding:12px 17px;font-weight:700;cursor:pointer}.primary{background:var(--teal);color:white}.secondary{background:white;color:var(--navy);border:1px solid var(--line)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 12px 30px #153b5710}.stat{display:flex;gap:12px;align-items:flex-start;margin:15px 0}.icon{width:40px;height:40px;border-radius:12px;background:#eaf3f8;display:grid;place-items:center;font-size:19px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:30px}.section{margin-top:44px}
+.features{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.feature{display:flex;gap:14px}
+label{font-size:13px;font-weight:700;display:block;margin:11px 0 6px}input,select{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:9px;background:#fff}
+.result{margin-top:15px;padding:13px;border:1px solid #cce4da;background:#f3fbf7;border-radius:10px;display:none}.result b{color:var(--green)}
+.safety{border-left:4px solid var(--green);background:#f2faf7}.danger{background:#fff5f5;border-left:4px solid var(--danger)}
+footer{padding:25px 7vw;color:#6b7280;font-size:13px;border-top:1px solid var(--line);background:#fff}
+small{color:#6b7280}@media(max-width:800px){.hero,.grid,.features{grid-template-columns:1fr}h1{font-size:38px}}
+</style>
+</head>
+<body>
+<header><nav><div class="brand">Saath Chalein</div><div class="pill">College-only • Affordable • Safety-first</div></nav></header>
+<main>
+<section class="hero">
+<div>
+<div class="pill" style="display:inline-block;color:var(--navy);border-color:var(--line);background:#fff">Student Mobility Project</div>
+<h1>Share the route.<br>Share the cost.</h1>
+<p>Saath Chalein connects students from the same college who travel on similar routes. Passengers get a low-cost option, while riders can share travel expenses and earn.</p>
+<div class="cta"><button class="btn primary" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})">Try the demo</button><button class="btn secondary" onclick="document.getElementById('safety').scrollIntoView({behavior:'smooth'})">See safety features</button></div>
+</div>
+<div class="card">
+<h2>Why Saath Chalein?</h2>
+<div class="stat"><div class="icon">₹</div><div><b>Student-friendly pricing</b><small> Fixed daily college-travel model for the pilot.</small></div></div>
+<div class="stat"><div class="icon">↔</div><div><b>Route-based matching</b><small> Match students travelling in the same direction.</small></div></div>
+<div class="stat"><div class="icon">✓</div><div><b>Verified community</b><small> College access and ride verification are built in.</small></div></div>
+</div>
+</section>
+
+<section class="section" id="demo">
+<h2>Interactive Ride Match Demo</h2>
+<p>This lightweight prototype shows how a student could request or offer a ride.</p>
+<div class="grid">
+<div class="card">
+<h3>Find a ride</h3>
+<label>College</label><select id="college"><option>Sample College</option><option>Engineering College</option><option>Degree College</option></select>
+<label>Pickup area</label><input id="pickup" placeholder="e.g. Patia">
+<label>Preferred rider</label><select id="pref"><option>Any</option><option>Female</option><option>Male</option></select>
+<button class="btn primary" style="margin-top:14px;width:100%" onclick="findRide()">Find matching rider</button>
+<div id="findResult" class="result"></div>
+</div>
+<div class="card">
+<h3>Offer a ride</h3>
+<label>Starting area</label><input id="start" placeholder="e.g. Khandagiri">
+<label>Seats available</label><select id="seats"><option>1</option><option>2</option><option>3</option></select>
+<label>Vehicle</label><select><option>Bike</option><option>Scooter</option><option>EV Scooter</option></select>
+<button class="btn primary" style="margin-top:14px;width:100%" onclick="offerRide()">Publish ride</button>
+<div id="offerResult" class="result"></div>
+</div>
+<div class="card">
+<h3>Pilot fare</h3>
+<p style="margin:6px 0 0">Suggested starting point from the project concept:</p>
+<div style="font-size:35px;font-weight:800;color:var(--navy);margin:10px 0">₹17–₹20</div>
+<small>per college day, subject to pilot validation</small>
+</div>
+</div>
+</section>
+
+<section class="section" id="safety">
+<h2>Safety & Security by Design</h2>
+<div class="features">
+<div class="card safety feature"><div class="icon">🪪</div><div><b>College verification</b><p>Access can be limited to approved students using institution-controlled verification.</p></div></div>
+<div class="card safety feature"><div class="icon">🔐</div><div><b>Ride OTP</b><p>A one-time trip code helps confirm that the intended rider and passenger join the correct trip.</p></div></div>
+<div class="card safety feature"><div class="icon">🚨</div><div><b>SOS support</b><p>An emergency action can surface trusted contacts and the college support channel during an active trip.</p></div></div>
+<div class="card safety feature"><div class="icon">📍</div><div><b>Live trip sharing</b><p>Students can optionally share the active trip status/location with a trusted contact.</p></div></div>
+<div class="card safety feature"><div class="icon">⚠</div><div><b>Report & block</b><p>Users can report unsafe driving, harassment or inappropriate behaviour and block accounts pending review.</p></div></div>
+<div class="card safety feature"><div class="icon">🛡</div><div><b>Privacy controls</b><p>Location visibility should be limited to what is needed for matching and active-trip safety.</p></div></div>
+</div>
+</section>
+
+<section class="section">
+<div class="card danger">
+<h2>Pilot-first approach</h2>
+<p>Saath Chalein should start with one college, a limited number of verified users, clear pickup rules, a support process and measurable safety/usage metrics. The model can then be refined before expanding to other colleges.</p>
+</div>
+</section>
+</main>
+<footer>Saath Chalein — student mobility prototype • Built as a project demonstration</footer>
+<script>
+function findRide(){const p=document.getElementById('pickup').value.trim()||'your area';const g=document.getElementById('pref').value;const r=document.getElementById('findResult');r.style.display='block';r.innerHTML='<b>Demo match found</b><br>Suggested rider from the same college, travelling from '+p+' toward campus. Preference: '+g+'.<br><small>In a production system this would come from verified route data.</small>'}
+function offerRide(){const s=document.getElementById('start').value.trim()||'your area';const n=document.getElementById('seats').value;const r=document.getElementById('offerResult');r.style.display='block';r.innerHTML='<b>Ride draft created</b><br>Pickup: '+s+' • Seats: '+n+'<br><small>Production flow would add verification, trip OTP and safety controls before publishing.</small>'}
+</script>
+</body></html>
